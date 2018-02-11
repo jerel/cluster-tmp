@@ -28,3 +28,22 @@ use Mix.Config
 # here (which is why it is important to import them last).
 #
 #     import_config "#{Mix.env}.exs"
+
+config :logger,
+  level: :info
+
+config :swarm,
+  # node_blacklist: [~r/^debug@127.0.0.1$/]
+  node_blacklist: ["debug@127.0.0.1"]
+  # node_whitelist: [~r/^[a-z]{1}@.*$/]
+  # node_whitelist: ["a@127.0.0.1"]#, "b@127.0.0.1", "c@127.0.0.1", "d@127.0.0.1", "e@127.0.0.1"]
+
+config :libcluster,
+  topologies: [
+    example: [
+      # The selected clustering strategy. Required.
+      strategy: Cluster.Strategy.Epmd,
+      # Configuration for the provided strategy. Optional.
+      config: [hosts: [:"a@127.0.0.1", :"b@127.0.0.1", :"c@127.0.0.1", :"d@127.0.0.1", :"e@127.0.0.1"]],
+    ]
+  ]
